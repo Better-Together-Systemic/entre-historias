@@ -11,321 +11,220 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: #1a1008;
-    min-height: 100vh;
-    font-family: 'Lato', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-  }
-
-  /* ===================== CARD — ocupa toda a largura disponível ===================== */
-  .card {
-    width: 100%;
-    max-width: 860px;
-    background: #fdf6ec;
-    position: relative;
-    box-shadow: 0 8px 60px rgba(0,0,0,0.5);
-    min-height: 100vh;
-  }
-
-  /* Faixas decorativas */
-  .top-stripe    { height: 6px;  background: linear-gradient(90deg, #8b3a1a, #c4692a, #d4a04a, #c4692a, #8b3a1a); }
-  .bottom-stripe { height: 5px;  background: linear-gradient(90deg, #8b3a1a, #c4692a, #d4a04a, #c4692a, #8b3a1a); }
-
-  /* ===================== HEADER ===================== */
-  .header {
-    background: #1a0e05;
-    padding: clamp(28px, 5vw, 52px) clamp(28px, 6vw, 80px) clamp(22px, 4vw, 42px);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(ellipse at 50% 0%, rgba(196,105,42,0.15) 0%, transparent 70%);
-  }
-  .header::after {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.015) 3px, rgba(255,255,255,0.015) 4px);
-    pointer-events: none;
-  }
-  .header-eyebrow {
-    font-size: clamp(11px, 1.3vw, 14px);
-    font-weight: 300;
-    letter-spacing: 5px;
-    color: #c4692a;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    position: relative;
-  }
-  .header-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(58px, 9vw, 90px);
-    font-weight: 300;
-    color: #fdf0e0;
-    line-height: 1;
-    letter-spacing: -1px;
-    position: relative;
-  }
+  body { background: #1a1008; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 16px; font-family: 'Lato', sans-serif; }
+  .card { width: 420px; max-width: 100%; background: #fdf6ec; border-radius: 4px; overflow: hidden; position: relative; box-shadow: 0 8px 60px rgba(0,0,0,0.5); }
+  .top-stripe { height: 5px; background: linear-gradient(90deg, #8b3a1a, #c4692a, #d4a04a, #c4692a, #8b3a1a); }
+  .header { background: #1a0e05; padding: 28px 32px 22px; text-align: center; position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(ellipse at 50% 0%, rgba(196,105,42,0.15) 0%, transparent 70%); }
+  .header::after { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.015) 3px, rgba(255,255,255,0.015) 4px); pointer-events: none; }
+  .header-eyebrow { font-size: 9px; font-weight: 300; letter-spacing: 4px; color: #c4692a; text-transform: uppercase; margin-bottom: 10px; position: relative; }
+  .header-title { font-family: 'Cormorant Garamond', serif; font-size: 46px; font-weight: 300; color: #fdf0e0; line-height: 1; letter-spacing: -1px; position: relative; }
   .header-title em { font-style: italic; color: #d4a04a; }
-  .header-divider {
-    display: flex; align-items: center; gap: 14px; justify-content: center;
-    margin-top: 16px; position: relative;
-  }
-  .header-divider span { height: 0.5px; width: 70px; background: rgba(212,160,74,0.4); display: block; }
-  .header-divider .diamond { width: 6px; height: 6px; background: #c4692a; transform: rotate(45deg); flex-shrink: 0; }
-
-  /* ===================== ILUSTRAÇÃO ===================== */
-  .illustration {
-    position: relative;
-    height: clamp(220px, 35vw, 380px);
-    overflow: hidden;
-    background: #2a1505;
-  }
+  .header-divider { display: flex; align-items: center; gap: 12px; justify-content: center; margin-top: 14px; position: relative; }
+  .header-divider span { height: 0.5px; width: 60px; background: rgba(212,160,74,0.4); display: block; }
+  .header-divider .diamond { width: 5px; height: 5px; background: #c4692a; transform: rotate(45deg); flex-shrink: 0; }
+  .illustration { position: relative; height: 220px; overflow: hidden; background: #2a1505; }
   .photo-frame { position: absolute; inset: 0; }
   .ill-svg { width: 100%; height: 100%; }
-  .illustration-overlay {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    padding: clamp(14px, 2.5vw, 28px) clamp(24px, 5vw, 60px);
-    background: linear-gradient(transparent, rgba(15,6,0,0.85));
-  }
-  .quote-line {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(18px, 2.6vw, 28px);
-    font-style: italic; font-weight: 300;
-    color: #f5e4c0; text-align: center;
-    letter-spacing: 0.3px; line-height: 1.55;
-  }
-
-  /* ===================== BODY ===================== */
-  .body-section {
-    padding: clamp(24px, 4vw, 52px) clamp(28px, 7vw, 100px) 0;
-    background: #fdf6ec;
-  }
-  .tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(22px, 3vw, 34px);
-    font-weight: 400; color: #3d1f08;
-    text-align: center; line-height: 1.6;
-    margin-bottom: clamp(20px, 3vw, 36px);
-  }
+  .illustration-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 24px; background: linear-gradient(transparent, rgba(15,6,0,0.85)); }
+  .quote-line { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; font-weight: 300; color: #f5e4c0; text-align: center; letter-spacing: 0.3px; line-height: 1.5; }
+  .body-section { padding: 24px 32px 0; background: #fdf6ec; }
+  .tagline { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; color: #3d1f08; text-align: center; line-height: 1.55; margin-bottom: 20px; }
   .tagline strong { font-weight: 600; color: #8b3a1a; }
-
-  .steps { display: flex; flex-direction: column; gap: clamp(12px, 1.8vw, 20px); margin-bottom: clamp(22px, 3vw, 38px); }
-  .step { display: flex; align-items: flex-start; gap: 14px; }
-  .step-dot {
-    width: clamp(24px, 2.8vw, 32px);
-    height: clamp(24px, 2.8vw, 32px);
-    border-radius: 50%; background: #8b3a1a;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; margin-top: 2px;
-  }
-  .step-dot svg { width: 11px; height: 11px; fill: #fdf0e0; }
-  .step-text {
-    font-size: clamp(17px, 2vw, 22px);
-    color: #4a2810; line-height: 1.55; font-weight: 300;
-  }
+  .steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+  .step { display: flex; align-items: flex-start; gap: 12px; }
+  .step-dot { width: 22px; height: 22px; border-radius: 50%; background: #8b3a1a; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-dot svg { width: 10px; height: 10px; fill: #fdf0e0; }
+  .step-text { font-size: 13px; color: #4a2810; line-height: 1.5; font-weight: 300; }
   .step-text strong { font-weight: 400; color: #2e1405; }
-
-  /* ===================== ORNAMENTO ===================== */
-  .ornament-divider {
-    display: flex; align-items: center; gap: 12px;
-    justify-content: center; margin: clamp(18px, 2.5vw, 34px) 0;
-  }
+  .ornament-divider { display: flex; align-items: center; gap: 10px; justify-content: center; margin: 18px 0; }
   .ornament-divider hr { flex: 1; height: 0.5px; background: #c9a07a; border: none; }
-  .ornament-divider .orn {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(18px, 2.2vw, 26px);
-    color: #c4692a; line-height: 1;
-  }
-
-  /* ===================== DELIVERABLES ===================== */
-  .del-wrap { padding: 0; }
-  .deliverables {
-    background: #2a1505;
-    padding: clamp(22px, 3vw, 44px) clamp(28px, 7vw, 100px);
-  }
-  .del-title {
-    font-size: clamp(15px, 1.8vw, 22px);
-    font-weight: 400; letter-spacing: 4px;
-    color: #d4a04a; text-transform: uppercase;
-    text-align: center; margin-bottom: clamp(18px, 2.5vw, 30px);
-    font-family: 'Cormorant Garamond', serif;
-  }
-  .del-items { display: flex; justify-content: space-between; gap: clamp(8px, 1.5vw, 18px); flex-wrap: wrap; }
-  .del-item {
-    flex: 1; min-width: 100px;
-    text-align: center;
-    padding: clamp(16px, 2vw, 28px) clamp(10px, 1.2vw, 18px);
-    border: 0.5px solid rgba(196,105,42,0.3); border-radius: 3px;
-  }
-  .del-item span { font-size: clamp(30px, 4vw, 48px); display: block; margin-bottom: 10px; }
-  .del-label {
-    font-size: clamp(14px, 1.6vw, 19px);
-    font-weight: 300; color: #d4b896;
-    line-height: 1.45; letter-spacing: 0.4px;
-  }
-
-  /* ===================== PREÇO ===================== */
-  .price-section {
-    padding: clamp(18px, 3vw, 40px) clamp(28px, 7vw, 100px) 0;
-    text-align: center; background: #fdf6ec;
-  }
-  .price-label {
-    font-size: clamp(10px, 1.1vw, 13px);
-    letter-spacing: 4px; color: #8b6040;
-    text-transform: uppercase; margin-bottom: 6px;
-  }
-  .price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(64px, 9vw, 100px);
-    font-weight: 300; color: #1a0e05; line-height: 1;
-  }
-  .price sup {
-    font-size: clamp(26px, 3.5vw, 40px);
-    vertical-align: super; color: #8b3a1a;
-  }
-  .price-note {
-    font-size: clamp(14px, 1.5vw, 18px);
-    color: #9a7050; font-weight: 300; margin-top: 6px;
-  }
-
-  /* ===================== CTA ===================== */
-  .cta-section {
-    padding: clamp(16px, 2.5vw, 36px) clamp(28px, 7vw, 100px) clamp(22px, 3.5vw, 48px);
-    background: #fdf6ec; text-align: center;
-  }
-  .cta-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(20px, 2.6vw, 30px);
-    font-style: italic; color: #3d1f08;
-    margin-bottom: clamp(16px, 2vw, 26px); line-height: 1.5;
-  }
-  .cta-btn {
-    display: inline-block; background: #8b3a1a; color: #fdf0e0;
-    font-size: clamp(13px, 1.4vw, 16px);
-    font-weight: 400; letter-spacing: 3px;
-    text-transform: uppercase;
-    padding: clamp(13px, 1.6vw, 18px) clamp(30px, 4vw, 52px);
-    border-radius: 2px; text-decoration: none;
-    cursor: pointer; border: none;
-    font-family: 'Lato', sans-serif;
-    transition: background 0.2s;
-  }
-  .cta-btn:hover { background: #a04520; }
-
-  /* ===================== FOOTER ===================== */
-  .footer {
-    background: #1a0e05;
-    padding: clamp(16px, 2.5vw, 32px) clamp(28px, 7vw, 100px);
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 16px;
-  }
-  .footer-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(20px, 2.4vw, 28px);
-    font-weight: 400; color: #fdf0e0; line-height: 1.3;
-  }
-  .footer-name span {
-    display: block;
-    font-size: clamp(13px, 1.4vw, 17px);
-    font-weight: 300; color: #9a7050;
-    letter-spacing: 1px; margin-top: 3px;
-  }
+  .ornament-divider .orn { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: #c4692a; line-height: 1; }
+  .deliverables { background: #2a1505; margin: 0 -32px; padding: 18px 32px; }
+  .del-title { font-size: 11px; font-weight: 400; letter-spacing: 3px; color: #d4a04a; text-transform: uppercase; text-align: center; margin-bottom: 12px; font-family: 'Cormorant Garamond', serif; }
+  .del-items { display: flex; justify-content: space-between; gap: 6px; }
+  .del-item { flex: 1; text-align: center; padding: 10px 6px; border: 0.5px solid rgba(196,105,42,0.3); border-radius: 3px; }
+  .del-label { font-size: 9.5px; font-weight: 300; color: #d4b896; line-height: 1.3; letter-spacing: 0.5px; }
+  .price-section { padding: 22px 32px 0; text-align: center; background: #fdf6ec; }
+  .price-label { font-size: 9px; letter-spacing: 3px; color: #8b6040; text-transform: uppercase; margin-bottom: 4px; }
+  .price { font-family: 'Cormorant Garamond', serif; font-size: 54px; font-weight: 300; color: #1a0e05; line-height: 1; }
+  .price sup { font-size: 22px; vertical-align: super; color: #8b3a1a; }
+  .price-note { font-size: 11px; color: #9a7050; font-weight: 300; margin-top: 4px; }
+  .cta-section { padding: 18px 32px 22px; background: #fdf6ec; text-align: center; }
+  .cta-text { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: #3d1f08; margin-bottom: 14px; line-height: 1.45; }
+  .cta-btn { display: inline-block; background: #8b3a1a; color: #fdf0e0; font-size: 11px; font-weight: 400; letter-spacing: 2.5px; text-transform: uppercase; padding: 12px 28px; border-radius: 2px; text-decoration: none; cursor: pointer; border: none; font-family: 'Lato', sans-serif; }
+  .footer { background: #1a0e05; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-name { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 400; color: #fdf0e0; line-height: 1.3; }
+  .footer-name span { display: block; font-size: 10px; font-weight: 300; color: #9a7050; letter-spacing: 1px; margin-top: 2px; }
   .footer-contact { text-align: right; }
-  .footer-brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(15px, 1.7vw, 20px);
-    font-style: italic; color: #d4a04a;
-    letter-spacing: 0.5px; margin-bottom: 8px;
-  }
-  .footer-links { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
-  .footer-link {
-    display: flex; align-items: center; gap: 7px;
-    text-decoration: none; transition: opacity 0.2s;
-  }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 11px; font-style: italic; color: #d4a04a; letter-spacing: 0.5px; margin-bottom: 7px; }
+  .footer-links { display: flex; flex-direction: column; gap: 5px; align-items: flex-end; }
+  .footer-link { display: flex; align-items: center; gap: 6px; text-decoration: none; transition: opacity 0.2s; }
   .footer-link:hover { opacity: 0.75; }
-  .footer-link-text {
-    font-size: clamp(13px, 1.4vw, 17px);
-    font-weight: 300; color: #c8a882;
-  }
+  .footer-link-text { font-size: 10px; font-weight: 300; color: #c8a882; }
+  .bottom-stripe { height: 4px; background: linear-gradient(90deg, #8b3a1a, #c4692a, #d4a04a, #c4692a, #8b3a1a); }
 
-  /* ===================== MODAL ===================== */
+  /* Modal overlay */
   .modal-overlay {
-    display: none; position: fixed; inset: 0;
+    display: none;
+    position: fixed;
+    inset: 0;
     background: rgba(10,5,0,0.75);
-    z-index: 100; align-items: center; justify-content: center;
-    padding: 16px;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
   }
   .modal-overlay.active { display: flex; }
+
   .modal {
-    background: #fdf6ec; border-radius: 6px;
-    width: 100%; max-width: 360px; overflow: hidden;
+    background: #fdf6ec;
+    border-radius: 6px;
+    width: 300px;
+    overflow: hidden;
     box-shadow: 0 16px 60px rgba(0,0,0,0.6);
   }
   .modal-header {
-    background: #1a0e05; padding: clamp(16px, 2vw, 22px) clamp(20px, 3vw, 30px);
-    display: flex; align-items: center; justify-content: space-between;
+    background: #1a0e05;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .modal-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(18px, 2.2vw, 22px);
-    font-style: italic; color: #d4a04a; font-weight: 300;
+    font-size: 16px;
+    font-style: italic;
+    color: #d4a04a;
+    font-weight: 300;
   }
   .modal-close {
-    background: none; border: none; color: #9a7050;
-    font-size: 24px; cursor: pointer; line-height: 1; padding: 0 2px;
+    background: none;
+    border: none;
+    color: #9a7050;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 2px;
   }
   .modal-close:hover { color: #fdf0e0; }
-  .modal-body { padding: clamp(18px, 2.5vw, 28px); }
+
+  .modal-body { padding: 20px; }
+
   .pay-options { display: flex; gap: 10px; margin-bottom: 18px; }
   .pay-btn {
-    flex: 1; padding: clamp(11px, 1.5vw, 16px) 8px;
-    border-radius: 4px; border: 1.5px solid rgba(139,58,26,0.3);
-    background: #fff8f0; cursor: pointer;
+    flex: 1;
+    padding: 11px 8px;
+    border-radius: 4px;
+    border: 1.5px solid rgba(139,58,26,0.3);
+    background: #fff8f0;
+    cursor: pointer;
     font-family: 'Lato', sans-serif;
-    font-size: clamp(13px, 1.4vw, 16px);
-    font-weight: 400; color: #4a2810;
-    letter-spacing: 1px; text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 400;
+    color: #4a2810;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     transition: all 0.2s;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
   }
   .pay-btn:hover { border-color: #8b3a1a; background: #fdeedd; }
   .pay-btn.selected { background: #8b3a1a; color: #fdf0e0; border-color: #8b3a1a; }
-  .pay-btn.selected svg path,
-  .pay-btn.selected svg rect,
-  .pay-btn.selected svg circle { stroke: #fdf0e0; }
+  .pay-btn.selected svg path, .pay-btn.selected svg rect, .pay-btn.selected svg circle { stroke: #fdf0e0; }
+  .pay-btn.selected .pix-color { fill: #fdf0e0; }
+
+  /* Cartão panel */
   .panel { display: none; }
   .panel.active { display: block; }
+
   .card-panel-text {
-    font-size: clamp(13px, 1.4vw, 16px);
-    color: #6a4020; text-align: center;
-    line-height: 1.6; margin-bottom: 16px; font-weight: 300;
+    font-size: 12px;
+    color: #6a4020;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 14px;
+    font-weight: 300;
   }
   .go-stripe {
-    display: block; width: 100%; background: #8b3a1a; color: #fdf0e0;
+    display: block;
+    width: 100%;
+    background: #8b3a1a;
+    color: #fdf0e0;
     font-family: 'Lato', sans-serif;
-    font-size: clamp(12px, 1.3vw, 15px);
-    letter-spacing: 2px; text-transform: uppercase;
-    padding: clamp(12px, 1.6vw, 16px);
-    border-radius: 3px; text-align: center;
-    text-decoration: none; cursor: pointer;
-    transition: background 0.2s;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px;
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
   }
   .go-stripe:hover { background: #a04520; }
 
-  /* ===================== RESPONSIVO MOBILE ===================== */
-  @media (max-width: 520px) {
-    .del-items { flex-wrap: wrap; }
-    .del-item { min-width: calc(50% - 8px); }
-    .footer { flex-direction: column; text-align: center; }
-    .footer-contact { text-align: center; }
-    .footer-links { align-items: center; }
+  /* Pix panel */
+  .qr-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .qr-wrap img {
+    width: 160px;
+    height: 160px;
+    border: 3px solid #e8d4b8;
+    border-radius: 4px;
+  }
+  .pix-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8b6040;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .pix-code-wrap {
+    background: #f5ede0;
+    border: 1px solid #e0c9a8;
+    border-radius: 4px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+  }
+  .pix-code {
+    font-size: 8.5px;
+    color: #5a3515;
+    word-break: break-all;
+    line-height: 1.5;
+    font-family: monospace;
+  }
+  .copy-btn {
+    width: 100%;
+    background: #2a7a4a;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 11px;
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    transition: background 0.2s;
+  }
+  .copy-btn:hover { background: #236640; }
+  .copy-btn.copied { background: #1a5030; }
+  .copy-feedback {
+    font-size: 10px;
+    color: #2a7a4a;
+    text-align: center;
+    margin-top: 7px;
+    height: 14px;
+    font-weight: 400;
   }
 </style>
 </head>
@@ -412,24 +311,24 @@
     </div>
   </div>
 
-  <div class="del-wrap">
+  <div style="padding: 0 32px;">
     <div class="deliverables">
       <div class="del-title">O que você recebe</div>
       <div class="del-items">
         <div class="del-item">
-          <span>🎙️</span>
+          <span style="font-size:20px; display:block; margin-bottom:4px;">🎙️</span>
           <div class="del-label">Resumo em<br>Vídeo & Áudio</div>
         </div>
         <div class="del-item">
-          <span>🖼️</span>
+          <span style="font-size:20px; display:block; margin-bottom:4px;">🖼️</span>
           <div class="del-label">Apresentação<br>em Slides</div>
         </div>
         <div class="del-item">
-          <span>📄</span>
+          <span style="font-size:20px; display:block; margin-bottom:4px;">📄</span>
           <div class="del-label">Registros<br>em PDF</div>
         </div>
         <div class="del-item">
-          <span>💬</span>
+          <span style="font-size:20px; display:block; margin-bottom:4px;">💬</span>
           <div class="del-label">1h30min de<br>Atendimento</div>
         </div>
       </div>
@@ -459,14 +358,14 @@
       <div class="footer-links">
         <a class="footer-link" href="https://wa.me/13214294517" target="_blank" rel="noopener">
           <span class="footer-link-text">Fale com a Eli!</span>
-          <svg width="18" height="18" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <svg width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
             <circle cx="16" cy="16" r="16" fill="#25D366"/>
             <path d="M23.5 8.5C21.6 6.6 19.1 5.5 16.4 5.5c-5.5 0-10 4.5-10 10 0 1.8.5 3.5 1.4 5L5.5 26.5l6.2-1.6c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10 0-2.7-1-5.2-2.9-7.1zM16.4 24.6c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.2.8.9-3.1-.2-.3c-.9-1.4-1.3-2.9-1.3-4.6 0-4.6 3.8-8.4 8.4-8.4 2.2 0 4.3.9 5.9 2.4 1.6 1.6 2.4 3.7 2.4 5.9 0 4.7-3.7 8.5-8.3 8.5zm4.6-6.3c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.9 1-.2.2-.3.2-.6.1-.2-.1-1.1-.4-2-1.3-.7-.7-1.2-1.5-1.4-1.8-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.3-.4.1-.1.1-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8.6.3 1.1.4 1.5.5.6.2 1.2.1 1.6-.1.5-.3.8-.6.9-1.1.1-.2.1-.5 0-.7z" fill="#fff"/>
           </svg>
         </a>
         <a class="footer-link" href="https://instagram.com/elianesimoescruz" target="_blank" rel="noopener">
           <span class="footer-link-text">@elianesimoescruz</span>
-          <svg width="18" height="18" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <svg width="16" height="16" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#f09433"/>
@@ -496,16 +395,21 @@
       <button class="modal-close" onclick="closeModal()">×</button>
     </div>
     <div class="modal-body">
+
+      <!-- Botões de seleção -->
       <div class="pay-options">
         <button class="pay-btn selected" id="btn-card" onclick="selectPay('card')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
             <rect x="2" y="5" width="20" height="14" rx="2" stroke="#4a2810" stroke-width="1.6"/>
             <line x1="2" y1="10" x2="22" y2="10" stroke="#4a2810" stroke-width="1.6"/>
             <rect x="5" y="13" width="5" height="2" rx="1" fill="#4a2810"/>
           </svg>
           Cartão
         </button>
+        
       </div>
+
+      <!-- Painel Cartão -->
       <div class="panel active" id="panel-card">
         <div class="card-panel-text">
           Você será redirecionado para a página de pagamento seguro.
@@ -514,7 +418,8 @@
           Pagar com Cartão →
         </a>
       </div>
-    </div>
+
+      </div>
   </div>
 </div>
 
@@ -522,10 +427,12 @@
   function closeModal() {
     document.getElementById('payModal').classList.remove('active');
   }
+
   function selectPay(type) {
     document.getElementById('btn-card').classList.toggle('selected', type === 'card');
     document.getElementById('panel-card').classList.toggle('active', type === 'card');
   }
 </script>
+
 </body>
 </html>
