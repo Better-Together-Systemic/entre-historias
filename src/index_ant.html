@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entre Histórias — Eli Simões</title>
+<meta name="description" content="Suas memórias merecem ser vistas, ouvidas e preservadas para sempre. Conheça o Entre Histórias.">
+<meta property="og:title" content="Entre Histórias — Eli Simões">
+<meta property="og:description" content="Suas memórias merecem ser vistas, ouvidas e preservadas para sempre.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1008;
+    min-height: 100vh;
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  /* ===================== CARD — ocupa toda a largura disponível ===================== */
+  .card {
+    width: 100%;
+    max-width: 860px;
+    background: #fdf6ec;
+    position: relative;
+    box-shadow: 0 8px 60px rgba(0,0,0,0.5);
+    min-height: 100vh;
+  }
+
+  /* Faixas decorativas */
+  .top-stripe    { height: 6px;  background: linear-gradient(90deg, #8b3a1a, #c4692a, #d4a04a, #c4692a, #8b3a1a); }
+  .bottom-stripe { height: 5px;  background: linear-gradient(90deg, #8b3a1a, #c4692a, #d4a04a, #c4692a, #8b3a1a); }
+
+  /* ===================== HEADER ===================== */
+  .header {
+    background: #1a0e05;
+    padding: clamp(28px, 5vw, 52px) clamp(28px, 6vw, 80px) clamp(22px, 4vw, 42px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(ellipse at 50% 0%, rgba(196,105,42,0.15) 0%, transparent 70%);
+  }
+  .header::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.015) 3px, rgba(255,255,255,0.015) 4px);
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    font-size: clamp(11px, 1.3vw, 14px);
+    font-weight: 300;
+    letter-spacing: 5px;
+    color: #c4692a;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(58px, 9vw, 90px);
+    font-weight: 300;
+    color: #fdf0e0;
+    line-height: 1;
+    letter-spacing: -1px;
+    position: relative;
+  }
+  .header-title em { font-style: italic; color: #d4a04a; }
+  .header-divider {
+    display: flex; align-items: center; gap: 14px; justify-content: center;
+    margin-top: 16px; position: relative;
+  }
+  .header-divider span { height: 0.5px; width: 70px; background: rgba(212,160,74,0.4); display: block; }
+  .header-divider .diamond { width: 6px; height: 6px; background: #c4692a; transform: rotate(45deg); flex-shrink: 0; }
+
+  /* ===================== ILUSTRAÇÃO ===================== */
+  .illustration {
+    position: relative;
+    height: clamp(220px, 35vw, 380px);
+    overflow: hidden;
+    background: #2a1505;
+  }
+  .photo-frame { position: absolute; inset: 0; }
+  .ill-svg { width: 100%; height: 100%; }
+  .illustration-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: clamp(14px, 2.5vw, 28px) clamp(24px, 5vw, 60px);
+    background: linear-gradient(transparent, rgba(15,6,0,0.85));
+  }
+  .quote-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.6vw, 28px);
+    font-style: italic; font-weight: 300;
+    color: #f5e4c0; text-align: center;
+    letter-spacing: 0.3px; line-height: 1.55;
+  }
+
+  /* ===================== BODY ===================== */
+  .body-section {
+    padding: clamp(24px, 4vw, 52px) clamp(28px, 7vw, 100px) 0;
+    background: #fdf6ec;
+  }
+  .tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 400; color: #3d1f08;
+    text-align: center; line-height: 1.6;
+    margin-bottom: clamp(20px, 3vw, 36px);
+  }
+  .tagline strong { font-weight: 600; color: #8b3a1a; }
+
+  .steps { display: flex; flex-direction: column; gap: clamp(12px, 1.8vw, 20px); margin-bottom: clamp(22px, 3vw, 38px); }
+  .step { display: flex; align-items: flex-start; gap: 14px; }
+  .step-dot {
+    width: clamp(24px, 2.8vw, 32px);
+    height: clamp(24px, 2.8vw, 32px);
+    border-radius: 50%; background: #8b3a1a;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .step-dot svg { width: 11px; height: 11px; fill: #fdf0e0; }
+  .step-text {
+    font-size: clamp(17px, 2vw, 22px);
+    color: #4a2810; line-height: 1.55; font-weight: 300;
+  }
+  .step-text strong { font-weight: 400; color: #2e1405; }
+
+  /* ===================== ORNAMENTO ===================== */
+  .ornament-divider {
+    display: flex; align-items: center; gap: 12px;
+    justify-content: center; margin: clamp(18px, 2.5vw, 34px) 0;
+  }
+  .ornament-divider hr { flex: 1; height: 0.5px; background: #c9a07a; border: none; }
+  .ornament-divider .orn {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.2vw, 26px);
+    color: #c4692a; line-height: 1;
+  }
+
+  /* ===================== DELIVERABLES ===================== */
+  .del-wrap { padding: 0; }
+  .deliverables {
+    background: #2a1505;
+    padding: clamp(22px, 3vw, 44px) clamp(28px, 7vw, 100px);
+  }
+  .del-title {
+    font-size: clamp(15px, 1.8vw, 22px);
+    font-weight: 400; letter-spacing: 4px;
+    color: #d4a04a; text-transform: uppercase;
+    text-align: center; margin-bottom: clamp(18px, 2.5vw, 30px);
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .del-items { display: flex; justify-content: space-between; gap: clamp(8px, 1.5vw, 18px); flex-wrap: wrap; }
+  .del-item {
+    flex: 1; min-width: 100px;
+    text-align: center;
+    padding: clamp(16px, 2vw, 28px) clamp(10px, 1.2vw, 18px);
+    border: 0.5px solid rgba(196,105,42,0.3); border-radius: 3px;
+  }
+  .del-item span { font-size: clamp(30px, 4vw, 48px); display: block; margin-bottom: 10px; }
+  .del-label {
+    font-size: clamp(14px, 1.6vw, 19px);
+    font-weight: 300; color: #d4b896;
+    line-height: 1.45; letter-spacing: 0.4px;
+  }
+
+  /* ===================== PREÇO ===================== */
+  .price-section {
+    padding: clamp(18px, 3vw, 40px) clamp(28px, 7vw, 100px) 0;
+    text-align: center; background: #fdf6ec;
+  }
+  .price-label {
+    font-size: clamp(10px, 1.1vw, 13px);
+    letter-spacing: 4px; color: #8b6040;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(64px, 9vw, 100px);
+    font-weight: 300; color: #1a0e05; line-height: 1;
+  }
+  .price sup {
+    font-size: clamp(26px, 3.5vw, 40px);
+    vertical-align: super; color: #8b3a1a;
+  }
+  .price-note {
+    font-size: clamp(14px, 1.5vw, 18px);
+    color: #9a7050; font-weight: 300; margin-top: 6px;
+  }
+
+  /* ===================== CTA ===================== */
+  .cta-section {
+    padding: clamp(16px, 2.5vw, 36px) clamp(28px, 7vw, 100px) clamp(22px, 3.5vw, 48px);
+    background: #fdf6ec; text-align: center;
+  }
+  .cta-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 2.6vw, 30px);
+    font-style: italic; color: #3d1f08;
+    margin-bottom: clamp(16px, 2vw, 26px); line-height: 1.5;
+  }
+  .cta-btn {
+    display: inline-block; background: #8b3a1a; color: #fdf0e0;
+    font-size: clamp(13px, 1.4vw, 16px);
+    font-weight: 400; letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: clamp(13px, 1.6vw, 18px) clamp(30px, 4vw, 52px);
+    border-radius: 2px; text-decoration: none;
+    cursor: pointer; border: none;
+    font-family: 'Lato', sans-serif;
+    transition: background 0.2s;
+  }
+  .cta-btn:hover { background: #a04520; }
+
+  /* ===================== FOOTER ===================== */
+  .footer {
+    background: #1a0e05;
+    padding: clamp(16px, 2.5vw, 32px) clamp(28px, 7vw, 100px);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 2.4vw, 28px);
+    font-weight: 400; color: #fdf0e0; line-height: 1.3;
+  }
+  .footer-name span {
+    display: block;
+    font-size: clamp(13px, 1.4vw, 17px);
+    font-weight: 300; color: #9a7050;
+    letter-spacing: 1px; margin-top: 3px;
+  }
+  .footer-contact { text-align: right; }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(15px, 1.7vw, 20px);
+    font-style: italic; color: #d4a04a;
+    letter-spacing: 0.5px; margin-bottom: 8px;
+  }
+  .footer-links { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  .footer-link {
+    display: flex; align-items: center; gap: 7px;
+    text-decoration: none; transition: opacity 0.2s;
+  }
+  .footer-link:hover { opacity: 0.75; }
+  .footer-link-text {
+    font-size: clamp(13px, 1.4vw, 17px);
+    font-weight: 300; color: #c8a882;
+  }
+
+  /* ===================== MODAL ===================== */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(10,5,0,0.75);
+    z-index: 100; align-items: center; justify-content: center;
+    padding: 16px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: #fdf6ec; border-radius: 6px;
+    width: 100%; max-width: 360px; overflow: hidden;
+    box-shadow: 0 16px 60px rgba(0,0,0,0.6);
+  }
+  .modal-header {
+    background: #1a0e05; padding: clamp(16px, 2vw, 22px) clamp(20px, 3vw, 30px);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.2vw, 22px);
+    font-style: italic; color: #d4a04a; font-weight: 300;
+  }
+  .modal-close {
+    background: none; border: none; color: #9a7050;
+    font-size: 24px; cursor: pointer; line-height: 1; padding: 0 2px;
+  }
+  .modal-close:hover { color: #fdf0e0; }
+  .modal-body { padding: clamp(18px, 2.5vw, 28px); }
+  .pay-options { display: flex; gap: 10px; margin-bottom: 18px; }
+  .pay-btn {
+    flex: 1; padding: clamp(11px, 1.5vw, 16px) 8px;
+    border-radius: 4px; border: 1.5px solid rgba(139,58,26,0.3);
+    background: #fff8f0; cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    font-size: clamp(13px, 1.4vw, 16px);
+    font-weight: 400; color: #4a2810;
+    letter-spacing: 1px; text-transform: uppercase;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .pay-btn:hover { border-color: #8b3a1a; background: #fdeedd; }
+  .pay-btn.selected { background: #8b3a1a; color: #fdf0e0; border-color: #8b3a1a; }
+  .pay-btn.selected svg path,
+  .pay-btn.selected svg rect,
+  .pay-btn.selected svg circle { stroke: #fdf0e0; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .card-panel-text {
+    font-size: clamp(13px, 1.4vw, 16px);
+    color: #6a4020; text-align: center;
+    line-height: 1.6; margin-bottom: 16px; font-weight: 300;
+  }
+  .go-stripe {
+    display: block; width: 100%; background: #8b3a1a; color: #fdf0e0;
+    font-family: 'Lato', sans-serif;
+    font-size: clamp(12px, 1.3vw, 15px);
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: clamp(12px, 1.6vw, 16px);
+    border-radius: 3px; text-align: center;
+    text-decoration: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .go-stripe:hover { background: #a04520; }
+
+  /* ===================== RESPONSIVO MOBILE ===================== */
+  @media (max-width: 520px) {
+    .del-items { flex-wrap: wrap; }
+    .del-item { min-width: calc(50% - 8px); }
+    .footer { flex-direction: column; text-align: center; }
+    .footer-contact { text-align: center; }
+    .footer-links { align-items: center; }
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top-stripe"></div>
+
+  <div class="header">
+    <div class="header-eyebrow">um convite especial</div>
+    <div class="header-title"><em>Entre</em> Histórias</div>
+    <div class="header-divider">
+      <span></span><div class="diamond"></div><span></span>
+    </div>
+  </div>
+
+  <div class="illustration">
+    <div class="photo-frame">
+      <svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" class="ill-svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="420" height="220" fill="#1c0d03"/>
+        <circle cx="210" cy="90" r="70" fill="#2e1a06"/>
+        <circle cx="210" cy="90" r="55" fill="#361e07"/>
+        <circle cx="210" cy="90" r="38" fill="#4a2a09" opacity="0.8"/>
+        <circle cx="210" cy="90" r="85" fill="none" stroke="#c4692a" stroke-width="0.5" opacity="0.25"/>
+        <circle cx="210" cy="90" r="100" fill="none" stroke="#d4a04a" stroke-width="0.3" opacity="0.15"/>
+        <ellipse cx="210" cy="135" rx="18" ry="22" fill="#1a0e03"/>
+        <circle cx="210" cy="108" r="11" fill="#1a0e03"/>
+        <rect x="188" y="128" width="44" height="6" rx="3" fill="#8b5520" opacity="0.9"/>
+        <rect x="192" y="125" width="16" height="9" rx="1" fill="#c4692a" opacity="0.85"/>
+        <rect x="212" y="125" width="16" height="9" rx="1" fill="#d4b07a" opacity="0.85"/>
+        <line x1="210" y1="124" x2="210" y2="135" stroke="#1a0e03" stroke-width="1"/>
+        <circle cx="155" cy="60" r="2.5" fill="#d4a04a" opacity="0.7"/>
+        <circle cx="175" cy="42" r="1.5" fill="#c4692a" opacity="0.6"/>
+        <circle cx="200" cy="30" r="2" fill="#d4a04a" opacity="0.5"/>
+        <circle cx="228" cy="38" r="1.5" fill="#e8c87a" opacity="0.7"/>
+        <circle cx="250" cy="55" r="2" fill="#c4692a" opacity="0.5"/>
+        <circle cx="268" cy="72" r="1.5" fill="#d4a04a" opacity="0.6"/>
+        <circle cx="137" cy="85" r="1.5" fill="#e8c87a" opacity="0.4"/>
+        <circle cx="280" cy="95" r="2" fill="#c4692a" opacity="0.4"/>
+        <line x1="210" y1="96" x2="155" y2="60" stroke="#d4a04a" stroke-width="0.4" opacity="0.3"/>
+        <line x1="210" y1="96" x2="200" y2="30" stroke="#d4a04a" stroke-width="0.4" opacity="0.25"/>
+        <line x1="210" y1="96" x2="250" y2="55" stroke="#d4a04a" stroke-width="0.4" opacity="0.25"/>
+        <line x1="210" y1="96" x2="268" y2="72" stroke="#c4692a" stroke-width="0.4" opacity="0.2"/>
+        <rect x="130" y="48" width="18" height="14" rx="1" fill="none" stroke="#d4a04a" stroke-width="0.8" opacity="0.6"/>
+        <rect x="133" y="51" width="12" height="8" rx="0.5" fill="#4a2a09" opacity="0.8"/>
+        <rect x="262" y="40" width="18" height="14" rx="1" fill="none" stroke="#c4692a" stroke-width="0.8" opacity="0.6"/>
+        <rect x="265" y="43" width="12" height="8" rx="0.5" fill="#4a2a09" opacity="0.8"/>
+        <rect x="148" y="150" width="14" height="10" rx="1" fill="none" stroke="#d4a04a" stroke-width="0.6" opacity="0.4"/>
+        <rect x="264" y="145" width="14" height="10" rx="1" fill="none" stroke="#c4692a" stroke-width="0.6" opacity="0.4"/>
+        <path d="M195 108 Q195 97 210 97 Q225 97 225 108" fill="none" stroke="#d4a04a" stroke-width="1.2" opacity="0.5"/>
+        <rect x="192" y="108" width="5" height="7" rx="2" fill="#c4692a" opacity="0.7"/>
+        <rect x="223" y="108" width="5" height="7" rx="2" fill="#c4692a" opacity="0.7"/>
+        <defs>
+          <linearGradient id="fadeBottom" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="50%" stop-color="#1c0d03" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#1c0d03" stop-opacity="0.9"/>
+          </linearGradient>
+        </defs>
+        <rect width="420" height="220" fill="url(#fadeBottom)"/>
+      </svg>
+    </div>
+    <div class="illustration-overlay">
+      <div class="quote-line">"Suas memórias merecem ser vistas, ouvidas e preservadas para sempre"</div>
+    </div>
+  </div>
+
+  <div class="body-section">
+    <div class="tagline">
+      Imagine ver sua trajetória de uma forma completamente nova —<br>
+      <strong>narrada, ilustrada e guardada para sempre.</strong>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-dot"><svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3"/></svg></div>
+        <div class="step-text"><strong>Conversamos 1 hora e 30 minutos ao vivo</strong> — você conta, eu escuto cada detalhe e suspiro da sua história</div>
+      </div>
+      <div class="step">
+        <div class="step-dot"><svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3"/></svg></div>
+        <div class="step-text"><strong>Crio um material exclusivo</strong> com tecnologia moderna — transformando suas lembranças em algo visível e eterno</div>
+      </div>
+      <div class="step">
+        <div class="step-dot"><svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3"/></svg></div>
+        <div class="step-text"><strong>Você recebe</strong> um presente único: sua história narrada, ilustrada e organizada para compartilhar com quem ama</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="del-wrap">
+    <div class="deliverables">
+      <div class="del-title">O que você recebe</div>
+      <div class="del-items">
+        <div class="del-item">
+          <span>🎙️</span>
+          <div class="del-label">Resumo em<br>Vídeo & Áudio</div>
+        </div>
+        <div class="del-item">
+          <span>🖼️</span>
+          <div class="del-label">Apresentação<br>em Slides</div>
+        </div>
+        <div class="del-item">
+          <span>📄</span>
+          <div class="del-label">Registros<br>em PDF</div>
+        </div>
+        <div class="del-item">
+          <span>💬</span>
+          <div class="del-label">1h30min de<br>Atendimento</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="price-section">
+    <div class="ornament-divider"><hr/><div class="orn">✦</div><hr/></div>
+    <div class="price-label">investimento</div>
+    <div class="price"><sup>€</sup>112</div>
+    <div class="price-note">atendimento online ao vivo · entrega digital completa</div>
+  </div>
+
+  <div class="cta-section">
+    <div class="ornament-divider"><hr/><div class="orn">✦</div><hr/></div>
+    <div class="cta-text">Uma forma diferente de você ver, ler e ter sua história junto com você.</div>
+    <button class="cta-btn" onclick="document.getElementById('payModal').classList.add('active')">Acesse aqui ✦</button>
+  </div>
+
+  <div class="footer">
+    <div class="footer-name">
+      Eli Simões
+      <span>Psicopedagoga · Terapeuta Sistêmica</span>
+    </div>
+    <div class="footer-contact">
+      <div class="footer-brand">Better Together</div>
+      <div class="footer-links">
+        <a class="footer-link" href="https://wa.me/13214294517" target="_blank" rel="noopener">
+          <span class="footer-link-text">Fale com a Eli!</span>
+          <svg width="18" height="18" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="16" fill="#25D366"/>
+            <path d="M23.5 8.5C21.6 6.6 19.1 5.5 16.4 5.5c-5.5 0-10 4.5-10 10 0 1.8.5 3.5 1.4 5L5.5 26.5l6.2-1.6c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10 0-2.7-1-5.2-2.9-7.1zM16.4 24.6c-1.5 0-3-.4-4.3-1.2l-.3-.2-3.2.8.9-3.1-.2-.3c-.9-1.4-1.3-2.9-1.3-4.6 0-4.6 3.8-8.4 8.4-8.4 2.2 0 4.3.9 5.9 2.4 1.6 1.6 2.4 3.7 2.4 5.9 0 4.7-3.7 8.5-8.3 8.5zm4.6-6.3c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.9 1-.2.2-.3.2-.6.1-.2-.1-1.1-.4-2-1.3-.7-.7-1.2-1.5-1.4-1.8-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.3-.4.1-.1.1-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.8.6.3 1.1.4 1.5.5.6.2 1.2.1 1.6-.1.5-.3.8-.6.9-1.1.1-.2.1-.5 0-.7z" fill="#fff"/>
+          </svg>
+        </a>
+        <a class="footer-link" href="https://instagram.com/elianesimoescruz" target="_blank" rel="noopener">
+          <span class="footer-link-text">@elianesimoescruz</span>
+          <svg width="18" height="18" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#f09433"/>
+                <stop offset="25%" stop-color="#e6683c"/>
+                <stop offset="50%" stop-color="#dc2743"/>
+                <stop offset="75%" stop-color="#cc2366"/>
+                <stop offset="100%" stop-color="#bc1888"/>
+              </linearGradient>
+            </defs>
+            <rect width="32" height="32" rx="8" fill="url(#ig-grad)"/>
+            <rect x="8" y="8" width="16" height="16" rx="4.5" fill="none" stroke="#fff" stroke-width="1.5"/>
+            <circle cx="16" cy="16" r="4" fill="none" stroke="#fff" stroke-width="1.5"/>
+            <circle cx="21.2" cy="10.8" r="1.1" fill="#fff"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-stripe"></div>
+</div>
+
+<!-- Modal de pagamento -->
+<div class="modal-overlay" id="payModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Como deseja pagar?</div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="pay-options">
+        <button class="pay-btn selected" id="btn-card" onclick="selectPay('card')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="5" width="20" height="14" rx="2" stroke="#4a2810" stroke-width="1.6"/>
+            <line x1="2" y1="10" x2="22" y2="10" stroke="#4a2810" stroke-width="1.6"/>
+            <rect x="5" y="13" width="5" height="2" rx="1" fill="#4a2810"/>
+          </svg>
+          Cartão
+        </button>
+      </div>
+      <div class="panel active" id="panel-card">
+        <div class="card-panel-text">
+          Você será redirecionado para a página de pagamento seguro.
+        </div>
+        <a class="go-stripe" href="https://buy.stripe.com/eVqaEXbFS1mTcsPexO9AA0g" target="_blank" rel="noopener">
+          Pagar com Cartão →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function closeModal() {
+    document.getElementById('payModal').classList.remove('active');
+  }
+  function selectPay(type) {
+    document.getElementById('btn-card').classList.toggle('selected', type === 'card');
+    document.getElementById('panel-card').classList.toggle('active', type === 'card');
+  }
+</script>
+</body>
+</html>
