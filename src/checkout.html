@@ -356,9 +356,10 @@ const CONFIG = {
      tipo "valor"      -> valor: 30  = R$ 30,00 de desconto
      link              -> link da InfinitePay já com o valor com desconto
 
-     CUPOM-PRESENTE (100% grátis, uso único):
+     CUPOM-PRESENTE (100% free, vagas limitadas):
        presente: true  -> não vai para pagamento: o botão vira "Fale com a Eli"
-       unico: true     -> só uma pessoa pode usar; quem clicar no botão consome o cupom
+       unico: true     -> uso limitado: quem clicar no botão consome uma vaga do cupom.
+                         O número de vagas (hoje, 2) fica no banco, no arquivo .sql
        mensagem        -> texto que já aparece escrito no WhatsApp
      Escreva o código em MAIÚSCULAS e sem acento. */
   cupons: {
@@ -391,7 +392,7 @@ const CONFIG = {
   var HTML_WHATS =
     '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.7-.85-2-.94-.26-.1-.45-.15-.64.15-.19.29-.74.94-.9 1.13-.17.19-.33.22-.62.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.29-.02-.45.13-.6.13-.13.3-.34.44-.51.15-.17.2-.29.3-.48.1-.19.05-.36-.02-.51-.08-.15-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49h-.55c-.19 0-.5.07-.76.36s-1 .98-1 2.38 1.02 2.76 1.17 2.95c.15.19 2.02 3.08 4.9 4.32.68.29 1.21.47 1.63.6.68.22 1.31.19 1.8.11.55-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34z"/><path d="M12 2A10 10 0 002 12c0 1.76.46 3.42 1.27 4.86L2 22l5.3-1.24A9.96 9.96 0 0012 22a10 10 0 000-20zm0 18.2a8.2 8.2 0 01-4.18-1.14l-.3-.18-3.1.73.73-3.02-.2-.31A8.2 8.2 0 1112 20.2z"/></svg> Fale com a Eli';
 
-  var TXT_JA_USADO = "Este cupom já foi utilizado. Cada presente vale para uma única pessoa.";
+  var TXT_JA_USADO = "Este cupom já foi utilizado e não está mais disponível.";
   var TXT_SEM_REDE = "Não conseguimos confirmar o cupom agora. Tente de novo em instantes.";
 
   /* ---------- utilidades ---------- */
@@ -484,7 +485,7 @@ const CONFIG = {
         linhaNormal.style.display = "none";
         linhaDesc.className = "linha-valor desconto";
       }
-      $("valorTotal").textContent = "Grátis";
+      $("valorTotal").textContent = "Free";
     } else if (temPreco()) {
       linhaNormal.style.display = "";
       bloco.style.display = ""; aviso.style.display = "none";
